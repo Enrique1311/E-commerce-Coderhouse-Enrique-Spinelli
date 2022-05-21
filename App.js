@@ -1,15 +1,20 @@
-import { StyleSheet, View, ActivityIndicator } from "react-native";
-import { useState } from "react";
-import CategoriesScreen from "./Screens/CategoriesScreen";
-import ProductsScreen from "./Screens/ProductsScreen";
+import { ActivityIndicator } from "react-native";
 import { useFonts } from "expo-font";
+import { SafeAreaView } from "react-native-safe-area-context";
+import MainNavigator from "./Navigation/Shop";
 
 export default function App() {
-  const [categorySelected, setCategorySelected] = useState(null);
+  // const [categorySelected, setCategorySelected] = useState(null);
 
-  const handleCategory = (category) => {
-    setCategorySelected(category);
-  };
+  // const [productSelected, setProductSelected] = useState(null);
+
+  // const handleCategory = (category) => {
+  //   setCategorySelected(category);
+  // };
+
+  // const handleProduct = (product) => {
+  //   setProductSelected(product);
+  // };
 
   const [loaded] = useFonts({
     Koulen: require("./assets/fonts/Koulen/Koulen-Regular.ttf"),
@@ -20,23 +25,8 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      {categorySelected ? (
-        <ProductsScreen
-          category={categorySelected}
-          handleCategory={handleCategory}
-        />
-      ) : (
-        <CategoriesScreen handleCategory={handleCategory} />
-      )}
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <MainNavigator />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

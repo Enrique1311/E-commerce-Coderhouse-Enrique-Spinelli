@@ -8,10 +8,12 @@ import { colors } from "../Styles/colors";
 import List from "../Components/List";
 import MyButton from "../Components/MyButton";
 import NotFound from "../Components/NotFound";
+import { TouchableWithoutFeedback } from "react-native";
+import GoBackButton from "../Components/GoBackButton";
 
 const ProductsScreen = ({
   category = { id: 1, category: "Notebooks" },
-  handleCategory,
+  navigation,
 }) => {
   const [input, setInput] = useState("");
 
@@ -25,7 +27,7 @@ const ProductsScreen = ({
       else {
         setProductsFiltered(
           initialProducts.filter((product) =>
-            product.description.toUpperCase().includes(input.toUpperCase())
+            product.name.toUpperCase().includes(input.toUpperCase())
           )
         );
       }
@@ -33,50 +35,48 @@ const ProductsScreen = ({
   }, [input, initialProducts]);
 
   useEffect(() => {
-    const initialProducts = PRODUCTS.filter(
+    const initialProd = PRODUCTS.filter(
       (product) => product.category === category.id
     );
-    setInitialProducts(initialProducts);
+    setInitialProducts(initialProd);
   }, []);
+
+  const handleDetailsProduct = () => {
+    navigation.navigate("Details");
+  };
 
   const handleErase = () => setInput("");
 
   return (
     <>
-      <Header title={category.category} />
-      <View style={styles.productsContainer}>
-        <Searcher
-          addStyles={{ backgroundColor: colors.blue }}
-          onPress={handleErase}
-        >
-          <TextInput
-            value={input}
-            onChangeText={setInput}
-            keyboardType="default"
-            placeholder="Ingrese un producto"
-            style={styles.input}
-          />
-        </Searcher>
-        <View style={styles.listContainer}>
-          {productsFiltered.length !== 0 ? (
-            <List
-              data={productsFiltered}
-              itemType="Producto"
-              onPress={() => {}}
+      <Header title={category.category} navigation={navigation} />
+      <TouchableWithoutFeedback>
+        <View style={styles.productsContainer}>
+          <Searcher
+            addStyles={{ backgroundColor: colors.blue }}
+            onPress={handleErase}
+          >
+            <TextInput
+              value={input}
+              onChangeText={setInput}
+              keyboardType="default"
+              placeholder="Ingrese un producto"
+              style={styles.input}
             />
-          ) : (
-            <NotFound />
-          )}
-          <View style={styles.productFooter}>
-            <MyButton
-              onPress={() => handleCategory(null)}
-              addButtonStyles={{ backgroundColor: colors.blue, width: 100 }}
-            >
-              <Entypo name="back" size={24} color={colors.secondary} />
-            </MyButton>
+          </Searcher>
+          <View style={styles.listContainer}>
+            {productsFiltered.length !== 0 ? (
+              <List
+                data={productsFiltered}
+                itemType={"Producto"}
+                onPress={handleDetailsProduct}
+              />
+            ) : (
+              <NotFound />
+            )}
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </>
   );
 };
@@ -103,9 +103,5 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-  },
-  productFooter: {
-    backgroundColor: colors.primary,
-    width: "100%",
   },
 });

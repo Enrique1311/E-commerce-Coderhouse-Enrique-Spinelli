@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View, Text, Image } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { useState, useEffect } from "react";
 import Header from "../Components/Header";
 import Searcher from "../Components/Searcher";
@@ -6,8 +6,9 @@ import { colors } from "../Styles/colors";
 import List from "../Components/List";
 import { CATEGORIES } from "../Data/categories";
 import NotFound from "../Components/NotFound";
+import { TouchableWithoutFeedback } from "react-native";
 
-const CategoriesScreen = ({ handleCategory }) => {
+const CategoriesScreen = ({ navigation }) => {
   const [input, setInput] = useState("");
 
   const [categoriesFilter, setCategoriesFilter] = useState(CATEGORIES);
@@ -25,34 +26,36 @@ const CategoriesScreen = ({ handleCategory }) => {
 
   const handleErase = () => setInput("");
 
-  handleSelectedCategory = (category) => {
-    handleCategory(category);
+  handleSelectedCategory = () => {
+    navigation.navigate("Products");
   };
 
   return (
     <>
-      <Header />
-      <View style={styles.categoriesContainer}>
-        <Searcher
-          addStyles={{ background: colors.terciary }}
-          onPress={handleErase}
-        >
-          <TextInput
-            value={input}
-            onChangeText={setInput}
-            keyboardType="default"
-            placeholder="Elige una categoría"
-            style={styles.input}
-          />
-        </Searcher>
-        <View>
-          {categoriesFilter.length !== 0 ? (
-            <List data={categoriesFilter} onPress={handleSelectedCategory} />
-          ) : (
-            <NotFound />
-          )}
+      <Header navigation={navigation} CATEGORIES={CATEGORIES} />
+      <TouchableWithoutFeedback>
+        <View style={styles.categoriesContainer}>
+          <Searcher
+            addStyles={{ background: colors.terciary }}
+            onPress={handleErase}
+          >
+            <TextInput
+              value={input}
+              onChangeText={setInput}
+              keyboardType="default"
+              placeholder="Elige una categoría"
+              style={styles.input}
+            />
+          </Searcher>
+          <View>
+            {categoriesFilter.length !== 0 ? (
+              <List data={categoriesFilter} onPress={handleSelectedCategory} />
+            ) : (
+              <NotFound />
+            )}
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </>
   );
 };

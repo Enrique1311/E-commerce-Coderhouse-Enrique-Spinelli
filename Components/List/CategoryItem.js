@@ -1,9 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { colors } from "../../Styles/colors";
 
 const CategoryItem = ({ category }) => {
+  const { width } = useWindowDimensions();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        width: width * 0.5 - 20,
+        height: width * 0.5 - 20,
+      }}
+    >
       <View style={styles.image}>{category.image}</View>
       <Text style={styles.text}>{category.category}</Text>
     </View>
@@ -14,13 +22,12 @@ export default CategoryItem;
 
 const styles = StyleSheet.create({
   container: {
-    width: 165,
-    height: 165,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.secondary,
     borderRadius: 25,
-    margin: 20,
+    marginHorizontal: 10,
+    marginVertical: 20,
     padding: 10,
     shadowColor: "#000",
     shadowOffset: {

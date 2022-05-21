@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import CategoryItem from "./CategoryItem";
 import ProductItem from "./ProductItem";
 
@@ -27,5 +27,3 @@ const List = ({ itemType = "category", data, onPress }) => {
 };
 
 export default List;
-
-const styles = StyleSheet.create({});
