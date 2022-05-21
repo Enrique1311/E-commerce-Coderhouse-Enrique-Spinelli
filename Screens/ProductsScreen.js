@@ -1,15 +1,12 @@
 import { StyleSheet, View, TextInput } from "react-native";
 import Searcher from "../Components/Searcher";
 import { useState, useEffect } from "react";
-import { Entypo } from "@expo/vector-icons";
 import { PRODUCTS } from "../Data/products";
 import Header from "../Components/Header";
 import { colors } from "../Styles/colors";
 import List from "../Components/List";
-import MyButton from "../Components/MyButton";
 import NotFound from "../Components/NotFound";
 import { TouchableWithoutFeedback } from "react-native";
-import GoBackButton from "../Components/GoBackButton";
 
 const ProductsScreen = ({
   category = { id: 1, category: "Notebooks" },
