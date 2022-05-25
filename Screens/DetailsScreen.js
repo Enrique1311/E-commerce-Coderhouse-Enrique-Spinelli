@@ -1,41 +1,42 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import Header from "../Components/Header";
+// import Header from "../Components/Header";
 import { colors } from "../Styles/colors";
-import img3 from "../assets/Images/notebook-dell.jpg";
-import GoBackButton from "../Components/GoBackButton";
+import { useEffect, useState } from "react";
+import { PRODUCTS } from "../Data/products";
 
-const DetailsScreen = ({
-  product = {
-    id: 1,
-    category: 1,
-    name: "Notebook Dell Inspiron 5510",
-    description:
-      "Intel Core i7-11390H, 32GB de RAM, 512GB SSD, 15.6 FHD IPS, Windows 11 Home",
-    price: 245000,
-    image: img3,
-  },
-  navigation,
-}) => {
+const DetailsScreen = ({ route }) => {
+  const { productId } = route.params;
+
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    setProduct(PRODUCTS.find((product) => product.id === productId));
+  }, [productId]);
+
   return (
-    <>
-      <Header title="Detalles del producto" navigation={navigation} />
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={product.image}
-            style={styles.image}
-            resizeMode="contain"
-          />
-        </View>
-        <View style={styles.detailsContainer}>
-          <View>
-            <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.description}>{product.description}</Text>
-            <Text style={styles.price}>$ {product.price}</Text>
+    product && (
+      <>
+        {/* <Header title="Detalles del producto" navigation={navigation} /> */}
+        <View style={styles.container}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={product.image}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          </View>
+          <View style={styles.detailsContainer}>
+            <View style={styles.details}>
+              <Text style={styles.title}>Características</Text>
+              <Text style={styles.description}>{product.description}</Text>
+              <View>
+                <Text style={styles.price}>$ {product.price}</Text>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
-    </>
+      </>
+    )
   );
 };
 
@@ -65,14 +66,19 @@ const styles = StyleSheet.create({
     minWidth: "80%",
     maxWidth: "100%",
   },
-  name: {
+  title: {
     fontFamily: "MuktaBold",
     fontSize: 22,
     color: colors.blue,
     textAlign: "center",
     minWidth: "100%",
-    marginBottom: 5,
-    marginTop: 10,
+  },
+  details: {
+    margin: 20,
+    padding: 10,
+    borderRadius: 15,
+    backgroundColor: colors.light,
+    width: "90%",
   },
   description: {
     fontFamily: "MuktaBold",
@@ -80,13 +86,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 10,
     marginHorizontal: 10,
-    borderRadius: 15,
-    backgroundColor: colors.light,
   },
   price: {
     fontSize: 20,
-    color: colors.primary,
-    backgroundColor: colors.terciary,
+    fontWeight: "bold",
+    color: colors.light,
+    backgroundColor: colors.primary,
     textAlign: "center",
     borderRadius: 25,
     marginHorizontal: 60,

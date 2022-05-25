@@ -1,6 +1,6 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import { useState, useEffect } from "react";
-import Header from "../Components/Header";
+//import Header from "../Components/Header";
 import Searcher from "../Components/Searcher";
 import { colors } from "../Styles/colors";
 import List from "../Components/List";
@@ -26,13 +26,15 @@ const CategoriesScreen = ({ navigation }) => {
 
   const handleErase = () => setInput("");
 
-  handleSelectedCategory = () => {
-    navigation.navigate("Products");
+  const handleSelectedCategory = (category) => {
+    navigation.navigate("Products", {
+      categoryId: category.id,
+      categoryTitle: category.category,
+    });
   };
-
   return (
     <>
-      <Header navigation={navigation} CATEGORIES={CATEGORIES} />
+      {/* <Header navigation={navigation} CATEGORIES={CATEGORIES} /> */}
       <TouchableWithoutFeedback>
         <View style={styles.categoriesContainer}>
           <Searcher
