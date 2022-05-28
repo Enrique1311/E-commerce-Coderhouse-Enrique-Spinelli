@@ -49,9 +49,14 @@ const CategoriesScreen = ({ navigation }) => {
               style={styles.input}
             />
           </Searcher>
-          <View>
+          <View style={styles.listContainer}>
             {categoriesFilter.length !== 0 ? (
-              <List data={categoriesFilter} onPress={handleSelectedCategory} />
+              <View style={styles.list}>
+                <List
+                  data={categoriesFilter}
+                  onPress={handleSelectedCategory}
+                />
+              </View>
             ) : (
               <NotFound />
             )}
@@ -75,5 +80,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 20,
     fontFamily: "MuktaBold",
+  },
+  listContainer: {
+    flex: 1,
+    width: "95%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 85,
+    marginTop: 5,
+    borderRadius: 20,
+    backgroundColor: colors.white,
+    borderWidth: 2,
+    borderColor: colors.secondary,
+    overflow: "hidden",
+  },
+  list: {
+    flex: 1,
   },
 });

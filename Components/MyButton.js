@@ -20,8 +20,8 @@ export default MyButton;
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.blue,
-    borderWidth: 5,
-    borderColor: colors.secondary,
+    borderWidth: 3,
+    borderColor: colors.light,
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",

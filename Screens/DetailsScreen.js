@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { colors } from "../Styles/colors";
 import { useEffect, useState } from "react";
 import { PRODUCTS } from "../Data/products";
+import MyButton from "../Components/MyButton";
 
 const DetailsScreen = ({ route }) => {
   const { productId } = route.params;
@@ -15,7 +16,7 @@ const DetailsScreen = ({ route }) => {
 
   return (
     product && (
-      <>
+      <View style={styles.mainContainer}>
         {/* <Header title="Detalles del producto" navigation={navigation} /> */}
         <View style={styles.container}>
           <View style={styles.imageContainer}>
@@ -27,15 +28,15 @@ const DetailsScreen = ({ route }) => {
           </View>
           <View style={styles.detailsContainer}>
             <View style={styles.details}>
-              <Text style={styles.title}>Características</Text>
               <Text style={styles.description}>{product.description}</Text>
-              <View>
-                <Text style={styles.price}>$ {product.price}</Text>
-              </View>
+              <Text style={styles.price}>Precio: $ {product.price}</Text>
             </View>
+            <MyButton addButtonStyles={{ marginBottom: 20 }}>
+              <Text style={styles.buttonText}>Agregar al carrito</Text>
+            </MyButton>
           </View>
         </View>
-      </>
+      </View>
     )
   );
 };
@@ -43,6 +44,17 @@ const DetailsScreen = ({ route }) => {
 export default DetailsScreen;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    marginBottom: 85,
+    marginTop: 5,
+    marginHorizontal: 10,
+    borderRadius: 20,
+    backgroundColor: colors.white,
+    borderWidth: 2,
+    borderColor: colors.secondary,
+    overflow: "hidden",
+  },
   container: {
     flex: 1,
     width: "100%",
@@ -63,39 +75,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.secondary,
     height: "60%",
-    minWidth: "80%",
-    maxWidth: "100%",
-  },
-  title: {
-    fontFamily: "MuktaBold",
-    fontSize: 22,
-    color: colors.blue,
-    textAlign: "center",
-    minWidth: "100%",
+    width: "100%",
   },
   details: {
     margin: 20,
     padding: 10,
-    borderRadius: 15,
+    borderRadius: 20,
     backgroundColor: colors.light,
     width: "90%",
   },
   description: {
     fontFamily: "MuktaBold",
-    fontSize: 16,
+    fontSize: 15,
     textAlign: "center",
-    padding: 10,
-    marginHorizontal: 10,
   },
   price: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
-    color: colors.light,
-    backgroundColor: colors.primary,
+    color: colors.primary,
     textAlign: "center",
-    borderRadius: 25,
-    marginHorizontal: 60,
-    marginVertical: 10,
-    padding: 5,
+  },
+  buttonText: {
+    color: colors.light,
+    fontFamily: "MuktaBold",
+    fontSize: 18,
   },
 });

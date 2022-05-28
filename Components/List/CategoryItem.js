@@ -8,8 +8,8 @@ const CategoryItem = ({ category }) => {
     <View
       style={{
         ...styles.container,
-        width: width * 0.5 - 20,
-        height: width * 0.5 - 20,
+        width: width * 0.5 - 50,
+        height: width * 0.5 - 50,
       }}
     >
       <View style={styles.image}>{category.image}</View>
@@ -25,18 +25,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.secondary,
-    borderRadius: 25,
-    marginHorizontal: 10,
-    marginVertical: 20,
+    borderRadius: 20,
     padding: 10,
-    shadowColor: "#000",
+    margin: 15,
+    shadowColor: colors.primary,
     shadowOffset: {
       width: 0,
       height: 5,
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-    elevation: 10,
+    elevation: 7,
   },
   text: {
     fontSize: 18,

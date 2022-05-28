@@ -3,6 +3,8 @@ export const colors = {
   secondary: "#BBBFCA",
   terciary: "#E8E8E8",
   light: "#F4F4F2",
+  isFocused: "#8D8DAA",
   blue: "#11468F",
   red: "#D82148",
+  white: "#FFFFFF",
 };

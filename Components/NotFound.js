@@ -16,7 +16,7 @@ export default NotFound;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     margin: 20,
     padding: 20,
     borderRadius: 25,

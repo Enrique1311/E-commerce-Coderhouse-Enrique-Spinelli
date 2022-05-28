@@ -68,15 +68,17 @@ const ProductsScreen = ({
             />
           </Searcher>
           <View style={styles.listContainer}>
-            {productsFiltered.length !== 0 ? (
-              <List
-                data={productsFiltered}
-                itemType={"Producto"}
-                onPress={handleDetailsProduct}
-              />
-            ) : (
-              <NotFound />
-            )}
+            <View style={styles.list}>
+              {productsFiltered.length !== 0 ? (
+                <List
+                  data={productsFiltered}
+                  itemType={"Producto"}
+                  onPress={handleDetailsProduct}
+                />
+              ) : (
+                <NotFound />
+              )}
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -104,7 +106,18 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    width: "100%",
+    width: "95%",
+    justifyContent: "center",
     alignItems: "center",
+    marginBottom: 85,
+    marginTop: 5,
+    borderRadius: 20,
+    backgroundColor: colors.white,
+    borderWidth: 2,
+    borderColor: colors.secondary,
+    overflow: "hidden",
+  },
+  list: {
+    flex: 1,
   },
 });

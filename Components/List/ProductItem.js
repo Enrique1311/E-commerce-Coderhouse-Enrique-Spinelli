@@ -12,7 +12,7 @@ const ProductItem = ({ product }) => {
   const { width } = useWindowDimensions();
 
   return (
-    <View style={{ ...styles.card, width: width * 0.8, height: width * 0.7 }}>
+    <View style={{ ...styles.card, width: width * 0.9, height: width * 0.7 }}>
       <View style={styles.imageContainer}>
         <Image
           source={product.image}
@@ -31,12 +31,11 @@ export default ProductItem;
 
 const styles = StyleSheet.create({
   card: {
-    maxWidth: "95%",
     backgroundColor: colors.primary,
     borderWidth: 2,
     borderColor: colors.primary,
-    borderRadius: 25,
-    margin: 10,
+    borderRadius: 20,
+    marginTop: 10,
     overflow: "hidden",
   },
   imageContainer: {
