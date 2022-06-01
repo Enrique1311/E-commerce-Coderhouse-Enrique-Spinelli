@@ -1,42 +1,59 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-// import Header from "../Components/Header";
+import Header from "../Components/Header";
 import { colors } from "../Styles/colors";
-import { useEffect, useState } from "react";
-import { PRODUCTS } from "../Data/products";
+//import { useEffect, useState } from "react";
+//import { PRODUCTS } from "../Data/products";
 import MyButton from "../Components/MyButton";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../features/cart";
 
-const DetailsScreen = ({ route }) => {
-  const { productId } = route.params;
+const DetailsScreen = ({ route, navigation }) => {
+  const { productSelected } = useSelector((state) => state.products.value);
+  const { productTitle } = route.params;
+  const dispatch = useDispatch();
 
-  const [product, setProduct] = useState(null);
+  const handleAdd = (id) => {
+    dispatch(addItem({ id: id }));
+  };
 
-  useEffect(() => {
-    setProduct(PRODUCTS.find((product) => product.id === productId));
-  }, [productId]);
+  //  const [product, setProduct] = useState(null);
+
+  // useEffect(() => {
+  //   setProduct(PRODUCTS.find((product) => product.id === productId));
+  // }, [productId]);
 
   return (
-    product && (
-      <View style={styles.mainContainer}>
-        {/* <Header title="Detalles del producto" navigation={navigation} /> */}
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image
-              source={product.image}
-              style={styles.image}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={styles.detailsContainer}>
-            <View style={styles.details}>
-              <Text style={styles.description}>{product.description}</Text>
-              <Text style={styles.price}>Precio: $ {product.price}</Text>
+    productSelected && (
+      <>
+        <Header title={productSelected.name} navigation={navigation} />
+        <View style={styles.mainContainer}>
+          <View style={styles.container}>
+            <View style={styles.imageContainer}>
+              <Image
+                source={productSelected.image}
+                style={styles.image}
+                resizeMode="contain"
+              />
             </View>
-            <MyButton addButtonStyles={{ marginBottom: 20 }}>
-              <Text style={styles.buttonText}>Agregar al carrito</Text>
-            </MyButton>
+            <View style={styles.detailsContainer}>
+              <View style={styles.details}>
+                <Text style={styles.description}>
+                  {productSelected.description}
+                </Text>
+                <Text style={styles.price}>
+                  Precio: $ {productSelected.price}
+                </Text>
+              </View>
+              <MyButton
+                onPress={() => handleAdd(productSelected.id)}
+                addButtonStyles={{ marginBottom: 20 }}
+              >
+                <Text style={styles.buttonText}>Agregar al carrito</Text>
+              </MyButton>
+            </View>
           </View>
         </View>
-      </View>
+      </>
     )
   );
 };
@@ -49,8 +66,9 @@ const styles = StyleSheet.create({
     marginBottom: 85,
     marginTop: 5,
     marginHorizontal: 10,
-    borderRadius: 20,
+    padding: 10,
     backgroundColor: colors.white,
+    borderRadius: 20,
     borderWidth: 2,
     borderColor: colors.secondary,
     overflow: "hidden",
@@ -59,13 +77,17 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     flexDirection: "column",
-    overflow: "hidden",
   },
   imageContainer: {
     height: "40%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    borderWidth: 2,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderColor: colors.secondary,
+    overflow: "hidden",
   },
   image: {
     flex: 1,
@@ -74,8 +96,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: colors.secondary,
-    height: "60%",
     width: "100%",
+    borderWidth: 2,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderColor: colors.secondary,
   },
   details: {
     margin: 20,

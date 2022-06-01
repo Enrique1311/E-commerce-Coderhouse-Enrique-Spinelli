@@ -18,7 +18,7 @@ const OrdersStack = () => {
           fontFamily: "Koulen",
           fontSize: 24,
         },
-        headerTitleAlign: "center",
+        headerTitleAlign: "left",
       }}
     >
       <Stack.Screen

@@ -15,7 +15,7 @@ const GoBackButton = ({ navigation }) => {
         borderWidth: 2,
       }}
     >
-      <Ionicons name="arrow-back" size={20} color={colors.secondary} />
+      <Ionicons name="arrow-back" size={20} color={colors.light} />
     </MyButton>
   );
 };

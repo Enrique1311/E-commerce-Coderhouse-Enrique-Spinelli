@@ -1,21 +1,11 @@
 import { ActivityIndicator } from "react-native";
 import { useFonts } from "expo-font";
-import { SafeAreaView } from "react-native-safe-area-context";
+//import { SafeAreaView } from "react-native-safe-area-context";
 import MainNavigator from "./Navigation";
+import { Provider } from "react-redux";
+import store from "./Store";
 
 export default function App() {
-  // const [categorySelected, setCategorySelected] = useState(null);
-
-  // const [productSelected, setProductSelected] = useState(null);
-
-  // const handleCategory = (category) => {
-  //   setCategorySelected(category);
-  // };
-
-  // const handleProduct = (product) => {
-  //   setProductSelected(product);
-  // };
-
   const [loaded] = useFonts({
     Koulen: require("./assets/fonts/Koulen/Koulen-Regular.ttf"),
     MuktaBold: require("./assets/fonts/Mukta/Mukta-Bold.ttf"),
@@ -25,8 +15,10 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    //  <SafeAreaView style={{ flex: 1 }}>
+    <Provider store={store}>
       <MainNavigator />
-    </SafeAreaView>
+    </Provider>
+    //  </SafeAreaView>
   );
 }

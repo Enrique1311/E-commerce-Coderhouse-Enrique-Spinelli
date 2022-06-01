@@ -1,12 +1,14 @@
 import { StyleSheet, View, TextInput } from "react-native";
 import Searcher from "../Components/Searcher";
 import { useState, useEffect } from "react";
-import { PRODUCTS } from "../Data/products";
-//import Header from "../Components/Header";
+//import { PRODUCTS } from "../Data/products";
+import Header from "../Components/Header";
 import { colors } from "../Styles/colors";
 import List from "../Components/List";
 import NotFound from "../Components/NotFound";
 import { TouchableWithoutFeedback } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductSelected } from "../features/products";
 
 const ProductsScreen = ({
   category = { id: 1, category: "Notebooks" },
@@ -15,36 +17,43 @@ const ProductsScreen = ({
 }) => {
   const [input, setInput] = useState("");
 
-  const [initialProducts, setInitialProducts] = useState([]);
+  //const [initialProducts, setInitialProducts] = useState([]);
 
   const [productsFiltered, setProductsFiltered] = useState([]);
+
+  const { products } = useSelector((state) => state.products.value);
+
+  const { productsByCategory } = useSelector((state) => state.products.value);
+
+  const dispatch = useDispatch();
 
   const { categoryId } = route.params;
 
   useEffect(() => {
-    if (initialProducts.length !== 0) {
-      if (input === "") setProductsFiltered(initialProducts);
+    if (productsByCategory.length !== 0) {
+      if (input === "") setProductsFiltered(productsByCategory);
       else {
         setProductsFiltered(
-          initialProducts.filter((product) =>
+          productsByCategory.filter((product) =>
             product.name.toUpperCase().includes(input.toUpperCase())
           )
         );
       }
     }
-  }, [input, initialProducts]);
+  }, [input, productsByCategory]);
 
-  useEffect(() => {
-    const initialProd = PRODUCTS.filter(
-      (product) => product.category === categoryId
-    );
-    setInitialProducts(initialProd);
-  }, [categoryId]);
+  // useEffect(() => {
+  //   const initialProd = products.filter(
+  //     (product) => product.category === categoryId
+  //   );
+  //   setInitialProducts(initialProd);
+  // }, [categoryId]);
 
   const handleDetailsProduct = (product) => {
+    dispatch(setProductSelected(product.id));
+
     navigation.navigate("Details", {
-      productId: product.id,
-      productTitle: product.name,
+      categoryTitle: category.category,
     });
   };
 
@@ -52,7 +61,7 @@ const ProductsScreen = ({
 
   return (
     <>
-      {/* <Header title={category.category} navigation={navigation} /> */}
+      <Header title={route.params.categoryTitle} navigation={navigation} />
       <TouchableWithoutFeedback>
         <View style={styles.productsContainer}>
           <Searcher

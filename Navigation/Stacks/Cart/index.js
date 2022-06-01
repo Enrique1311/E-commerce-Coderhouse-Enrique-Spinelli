@@ -18,7 +18,7 @@ const CartStack = () => {
           fontFamily: "Koulen",
           fontSize: 25,
         },
-        headerTitleAlign: "center",
+        headerTitleAlign: "left",
       }}
     >
       <Stack.Screen

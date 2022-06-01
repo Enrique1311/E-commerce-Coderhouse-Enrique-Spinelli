@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: "95%",
     justifyContent: "space-between",
     alignSelf: "center",
-    marginBottom: 100,
+    marginBottom: 85,
     marginTop: 10,
     borderRadius: 20,
     backgroundColor: colors.white,

@@ -36,6 +36,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 5,
     marginBottom: 5,
+    shadowColor: colors.primary,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 3,
+    margin: 10,
   },
   name: {
     color: colors.blue,

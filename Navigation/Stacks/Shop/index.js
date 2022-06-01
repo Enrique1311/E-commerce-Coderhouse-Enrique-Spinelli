@@ -15,9 +15,10 @@ function ShopNavigator() {
           backgroundColor: colors.primary,
         },
         headerTintColor: colors.light,
+        headerShown: "",
         headerTitleStyle: {
           fontFamily: "Koulen",
-          fontSize: 25,
+          fontSize: 26,
         },
         headerTitleAlign: "center",
       }}
@@ -26,6 +27,7 @@ function ShopNavigator() {
         name="Categories"
         component={CategoriesScreen}
         options={{
+          headerShown: false,
           title: "Categorías",
         }}
       />
@@ -34,6 +36,7 @@ function ShopNavigator() {
         component={ProductsScreen}
         options={({ route }) => ({
           title: route.params.categoryTitle,
+          headerShown: false,
         })}
       />
       <Stack.Screen
@@ -41,6 +44,7 @@ function ShopNavigator() {
         component={DetailsScreen}
         options={({ route }) => ({
           title: route.params.productTitle,
+          headerShown: false,
         })}
       />
     </Stack.Navigator>

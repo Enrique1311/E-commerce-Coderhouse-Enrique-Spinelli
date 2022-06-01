@@ -3,17 +3,18 @@ import { colors } from "../Styles/colors";
 import GoBackButton from "./GoBackButton";
 
 const Header = ({
-  title = "Tecnology World E-commerce",
+  title = "Categorías",
   navigation,
   categoriesFilter,
-  CATEGORIES,
+  categories,
 }) => {
   return (
     <View style={styles.container}>
-      {categoriesFilter === CATEGORIES ? (
-        <GoBackButton navigation={navigation} />
-      ) : null}
-
+      <View style={styles.buttonContainer}>
+        {categoriesFilter === categories ? (
+          <GoBackButton navigation={navigation} />
+        ) : null}
+      </View>
       <Text style={styles.text}>{title}</Text>
     </View>
   );
@@ -24,17 +25,17 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary,
-    height: 60,
     width: "100%",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingLeft: 20,
+    paddingHorizontal: 20,
   },
   text: {
+    width: "85%",
     fontFamily: "Koulen",
-    fontSize: 20,
+    fontSize: 22,
     color: colors.light,
-    marginLeft: 20,
+    margin: 10,
   },
 });

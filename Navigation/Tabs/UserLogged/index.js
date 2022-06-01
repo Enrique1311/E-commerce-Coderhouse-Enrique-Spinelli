@@ -106,12 +106,10 @@ const styles = StyleSheet.create({
     elevation: 5,
     position: "absolute",
     backgroundColor: colors.blue,
-    bottom: 10,
-    left: 10,
-    right: 10,
     borderRadius: 20,
     height: 70,
     alignSelf: "center",
+    margin: 10,
   },
   item: {
     flex: 1,

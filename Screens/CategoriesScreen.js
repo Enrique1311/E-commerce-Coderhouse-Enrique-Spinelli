@@ -1,23 +1,31 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import { useState, useEffect } from "react";
-//import Header from "../Components/Header";
+import Header from "../Components/Header";
 import Searcher from "../Components/Searcher";
 import { colors } from "../Styles/colors";
 import List from "../Components/List";
-import { CATEGORIES } from "../Data/categories";
 import NotFound from "../Components/NotFound";
 import { TouchableWithoutFeedback } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { CATEGORIES } from "../Data/categories";
+import { selectCategory } from "../features/categories";
+import { setProductByCategory } from "../features/products";
+//import { CATEGORIES } from "../Data/categories";
 
 const CategoriesScreen = ({ navigation }) => {
   const [input, setInput] = useState("");
 
   const [categoriesFilter, setCategoriesFilter] = useState(CATEGORIES);
 
+  const { categories } = useSelector((state) => state.categories.value);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (input === "") setCategoriesFilter(CATEGORIES);
+    if (input === "") setCategoriesFilter(categories);
     else {
       setCategoriesFilter(
-        CATEGORIES.filter((category) =>
+        categories.filter((category) =>
           category.category.toUpperCase().includes(input.toUpperCase())
         )
       );
@@ -27,6 +35,9 @@ const CategoriesScreen = ({ navigation }) => {
   const handleErase = () => setInput("");
 
   const handleSelectedCategory = (category) => {
+    dispatch(setProductByCategory(category.id));
+    dispatch(selectCategory(category.id));
+
     navigation.navigate("Products", {
       categoryId: category.id,
       categoryTitle: category.category,
@@ -34,7 +45,11 @@ const CategoriesScreen = ({ navigation }) => {
   };
   return (
     <>
-      {/* <Header navigation={navigation} CATEGORIES={CATEGORIES} /> */}
+      <Header
+        navigation={navigation}
+        title="Categorías"
+        categories={categories}
+      />
       <TouchableWithoutFeedback>
         <View style={styles.categoriesContainer}>
           <Searcher

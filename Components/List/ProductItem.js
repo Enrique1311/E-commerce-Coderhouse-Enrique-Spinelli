@@ -12,7 +12,7 @@ const ProductItem = ({ product }) => {
   const { width } = useWindowDimensions();
 
   return (
-    <View style={{ ...styles.card, width: width * 0.9, height: width * 0.7 }}>
+    <View style={{ ...styles.card, width: width * 0.8 }}>
       <View style={styles.imageContainer}>
         <Image
           source={product.image}
@@ -21,7 +21,8 @@ const ProductItem = ({ product }) => {
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{product.name}</Text>
+        <Text style={styles.name}>{product.name}</Text>
+        <Text style={styles.price}>${product.price}</Text>
       </View>
     </View>
   );
@@ -31,16 +32,25 @@ export default ProductItem;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
     borderWidth: 2,
-    borderColor: colors.primary,
+    borderColor: colors.secondary,
     borderRadius: 20,
-    marginTop: 10,
+    margin: 10,
     overflow: "hidden",
+    shadowColor: colors.primary,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 3,
+    height: "auto",
   },
   imageContainer: {
     width: "100%",
-    height: "80%",
+    height: 180,
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
@@ -50,12 +60,19 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     justifyContent: "center",
-    height: "20%",
+    padding: 5,
   },
-  text: {
-    fontSize: 16,
+  name: {
+    fontSize: 18,
     textAlign: "center",
-    color: colors.light,
+    color: colors.primary,
     fontFamily: "MuktaBold",
+  },
+  price: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: colors.blue,
+    fontFamily: "MuktaBold",
+    textAlign: "center",
   },
 });

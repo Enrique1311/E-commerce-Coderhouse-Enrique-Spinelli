@@ -1,27 +1,27 @@
-import { Feather } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { colors } from "../Styles/colors";
+import cat1 from "../assets/Images/categoriesImages/notebooks.jpg";
+import cat2 from "../assets/Images/categoriesImages/tablet.jpg";
+import cat3 from "../assets/Images/categoriesImages/calulares.jpg";
+import cat4 from "../assets/Images/categoriesImages/monitores.jpg";
 
 export const CATEGORIES = [
   {
     id: 1,
     category: "Notebooks",
-    image: <Entypo name="laptop" size={70} color={colors.blue} />,
+    image: cat1,
   },
   {
     id: 2,
     category: "Tablets",
-    image: <Entypo name="tablet" size={60} color={colors.blue} />,
+    image: cat2,
   },
   {
     id: 3,
     category: "Celulares",
-    image: <FontAwesome name="mobile" size={70} color={colors.blue} />,
+    image: cat3,
   },
   {
     id: 4,
     category: "Monitores",
-    image: <Feather name="monitor" size={70} color={colors.blue} />,
+    image: cat4,
   },
 ];
