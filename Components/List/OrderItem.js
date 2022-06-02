@@ -12,7 +12,7 @@ const OrderItem = ({ item }) => {
     <View style={styles.order}>
       <View style={styles.orderContainer}>
         <Text style={styles.date}>{formatDay(item.date)}</Text>
-        <Text style={styles.total}>$ {item.total}</Text>
+        <Text style={styles.total}>{item.total}</Text>
       </View>
     </View>
   );
