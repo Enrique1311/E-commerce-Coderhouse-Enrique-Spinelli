@@ -14,15 +14,19 @@ const initialState = {
 export const confirmAll = createAsyncThunk(
   "cart/confirm",
   async (items, asyncThunk) => {
-    const resp = await fetch(`${DB_URL}orders.json`, {
-      method: "POST",
-      body: JSON.stringify({
-        date: new Date().toLocaleDateString(),
-        items: items,
-      }),
-    });
-    const data = resp.json();
-    return data;
+    try {
+      const resp = await fetch(`${DB_URL}orders.json`, {
+        method: "POST",
+        body: JSON.stringify({
+          date: new Date().toLocaleDateString(),
+          items: items,
+        }),
+      });
+      const data = resp.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue("Hubo un error");
+    }
   }
 );
 
@@ -58,6 +62,7 @@ export const cartSlice = createSlice({
     },
     [confirmAll.rejected]: (state) => {
       state.value.loading = false;
+      state.value.error = true;
     },
   },
 });

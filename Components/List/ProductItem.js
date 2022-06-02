@@ -39,13 +39,10 @@ const styles = StyleSheet.create({
     margin: 10,
     overflow: "hidden",
     shadowColor: colors.primary,
-    shadowOffset: {
-      width: 5,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.25,
+    shadowRadius: 0.25,
+    elevation: 5,
     height: "auto",
   },
   imageContainer: {

@@ -1,12 +1,20 @@
 import { StyleSheet, View, FlatList } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import OrderItem from "../Components/List/OrderItem";
 import { ORDERS } from "../Data/orders";
 import { colors } from "../Styles/colors";
+import { useDispatch } from "react-redux";
+import { getOrders } from "../features/orders";
 
 const renderItem = (data) => <OrderItem item={data.item} />;
 
 const OrdersScreen = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrders());
+  }, []);
+
   return (
     <View style={styles.ordersContainer}>
       <View style={styles.list}>
