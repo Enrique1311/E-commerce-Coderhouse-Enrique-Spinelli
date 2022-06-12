@@ -1,18 +1,23 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import { useState } from "react";
 import MyInput from "../Components/MyInput";
 import { colors } from "../Styles/colors";
 import MyButton from "../Components/MyButton";
+import { useDispatch } from "react-redux";
+import { signUp } from "../features/auth";
 
 const LoginScreen = () => {
   const [registerView, setRegisterView] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const dispatch = useDispatch();
 
   const handleSignUp = () => {
-    console.log("sign up");
+    if (password === passwordConfirm) {
+      console.log("sign up");
+      dispatch(signUp({ email, password }));
+    }
   };
 
   return (
