@@ -13,6 +13,7 @@ const OrdersScreen = () => {
 
   /////////////
   const { orders } = useSelector((state) => state.orders.value);
+  console.log(orders);
   //////////////
 
   useEffect(() => {
@@ -23,9 +24,10 @@ const OrdersScreen = () => {
     <View style={styles.ordersContainer}>
       <View style={styles.list}>
         <FlatList
-          data={ORDERS}
+          data={orders}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
   ordersContainer: {
     flex: 1,
     width: "95%",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignSelf: "center",
     marginBottom: 85,
     marginTop: 10,

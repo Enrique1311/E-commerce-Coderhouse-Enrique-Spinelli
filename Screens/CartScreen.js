@@ -1,7 +1,6 @@
 import { FlatList, Text, View, StyleSheet } from "react-native";
 import React from "react";
 import CartItem from "../Components/List/CartItem";
-//import { PRODUCTSSELECTED } from "../Data/productsSelected";
 import MyButton from "../Components/MyButton";
 import { colors } from "../Styles/colors";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +30,7 @@ const CartScreen = () => {
           data={cart}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
         />
       </View>
       <View style={styles.footer}>

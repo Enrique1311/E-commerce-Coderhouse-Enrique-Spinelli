@@ -12,7 +12,7 @@ const OrderItem = ({ item }) => {
     <View style={styles.order}>
       <View style={styles.orderContainer}>
         <Text style={styles.date}>{formatDay(item.date)}</Text>
-        <Text style={styles.total}>{item.total}</Text>
+        <Text style={styles.total}>{}</Text>
       </View>
     </View>
   );
@@ -25,12 +25,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   orderContainer: {
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.terciary,
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
     margin: 10,
-    marginBottom: 100,
     shadowColor: colors.primary,
     shadowOffset: {
       width: 5,
