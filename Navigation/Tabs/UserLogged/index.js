@@ -7,6 +7,8 @@ import { colors } from "../../../Styles/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import OrdersStack from "../../Stacks/Orders";
+import { Ionicons } from "@expo/vector-icons";
+import LocationStack from "../../Stacks/Locations";
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -85,6 +87,30 @@ const TabNavigatorLogged = () => {
                   }}
                 >
                   Ordenes
+                </Text>
+              </View>
+            );
+          },
+        }}
+      />
+      <BottomTabs.Screen
+        name="LocationsTab"
+        component={LocationStack}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View style={styles.item}>
+                <Ionicons
+                  name="location-sharp"
+                  size={26}
+                  color={!focused ? colors.terciary : colors.isFocused}
+                />
+                <Text
+                  style={{
+                    color: !focused ? colors.terciary : colors.isFocused,
+                  }}
+                >
+                  Direcciones
                 </Text>
               </View>
             );

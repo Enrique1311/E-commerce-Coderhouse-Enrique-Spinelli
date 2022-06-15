@@ -65,16 +65,16 @@ const styles = StyleSheet.create({
     bottom: 5,
   },
   imageContainer: {
-    height: "80%",
+    height: "70%",
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
   },
   image: {
-    height: "75%",
+    height: "70%",
   },
   textContainer: {
     justifyContent: "center",
-    height: "20%",
+    height: "30%",
   },
 });

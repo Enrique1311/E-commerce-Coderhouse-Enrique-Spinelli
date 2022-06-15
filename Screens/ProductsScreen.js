@@ -1,7 +1,6 @@
 import { StyleSheet, View, TextInput } from "react-native";
 import Searcher from "../Components/Searcher";
 import { useState, useEffect } from "react";
-//import { PRODUCTS } from "../Data/products";
 import Header from "../Components/Header";
 import { colors } from "../Styles/colors";
 import List from "../Components/List";
@@ -16,8 +15,6 @@ const ProductsScreen = ({
   route,
 }) => {
   const [input, setInput] = useState("");
-
-  //const [initialProducts, setInitialProducts] = useState([]);
 
   const [productsFiltered, setProductsFiltered] = useState([]);
 
@@ -41,13 +38,6 @@ const ProductsScreen = ({
       }
     }
   }, [input, productsByCategory]);
-
-  // useEffect(() => {
-  //   const initialProd = products.filter(
-  //     (product) => product.category === categoryId
-  //   );
-  //   setInitialProducts(initialProd);
-  // }, [categoryId]);
 
   const handleDetailsProduct = (product) => {
     dispatch(setProductSelected(product.id));
@@ -74,6 +64,7 @@ const ProductsScreen = ({
               keyboardType="default"
               placeholder="Ingrese un producto"
               style={styles.input}
+              selectionColor={colors.primary}
             />
           </Searcher>
           <View style={styles.listContainer}>

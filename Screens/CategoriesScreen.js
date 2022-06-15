@@ -62,6 +62,7 @@ const CategoriesScreen = ({ navigation }) => {
               keyboardType="default"
               placeholder="Elige una categoría"
               style={styles.input}
+              selectionColor={colors.primary}
             />
           </Searcher>
           <View style={styles.listContainer}>
