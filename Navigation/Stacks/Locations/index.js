@@ -5,6 +5,8 @@ import MyButton from "../../../Components/MyButton";
 import { MaterialIcons } from "@expo/vector-icons";
 import LocationsScreen from "../../../Screens/LocationsScreen";
 import AddLocationScreen from "../../../Screens/AddLocationScreen";
+import GetLocationScreen from "../../../Screens/GetLocationScreen";
+import SetLocationScreen from "../../../Screens/SetLocationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +49,20 @@ const LocationsStack = () => {
         component={AddLocationScreen}
         options={{
           title: "Agregar dirección",
+        }}
+      />
+      <Stack.Screen
+        name="GetLocation"
+        component={GetLocationScreen}
+        options={{
+          title: "Obtener ubicación",
+        }}
+      />
+      <Stack.Screen
+        name="SetLocation"
+        component={SetLocationScreen}
+        options={{
+          title: "Ubicación manual",
         }}
       />
     </Stack.Navigator>

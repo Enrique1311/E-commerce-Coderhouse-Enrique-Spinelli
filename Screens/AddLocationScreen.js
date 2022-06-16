@@ -2,17 +2,20 @@ import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import { colors } from "../Styles/colors";
 import * as ImagePicker from "expo-image-picker";
-import renamePathAndMove from "../Utilities/renamePath";
+//import renamePathAndMove from "../Utilities/renamePath";
 import { useDispatch } from "react-redux";
 import { addLocation } from "../features/locations";
 import MyButton from "../Components/MyButton";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const SaveLocationScreen = () => {
+const AddLocationScreen = ({ navigation, route }) => {
   const [title, setTitle] = useState("");
   const [picture, setPicture] = useState("");
+
+  const params = route.params;
 
   const dispatch = useDispatch();
 
@@ -52,10 +55,20 @@ const SaveLocationScreen = () => {
   };
 
   const handleConfirm = async () => {
-    // const path = await renamePathAndMove(picture);
-    dispatch(addLocation({ title, picture, id: Date.now() }));
+    //const path = await renamePathAndMove(picture);
+    dispatch(
+      addLocation({ title, picture, id: Date.now(), address: params?.address })
+    );
     setTitle("");
     setPicture("");
+  };
+
+  const handleSetLocation = () => {
+    navigation.navigate("SetLocation");
+  };
+
+  const handleLocation = () => {
+    navigation.navigate("GetLocation");
   };
 
   return (
@@ -69,7 +82,6 @@ const SaveLocationScreen = () => {
           style={styles.input}
           selectionColor={colors.white}
         />
-
         {picture ? (
           <Image source={{ uri: picture }} style={styles.image} />
         ) : null}
@@ -79,6 +91,20 @@ const SaveLocationScreen = () => {
           </MyButton>
           <MyButton onPress={handlePickLibrary}>
             <Ionicons name="images" size={24} color={colors.terciary} />
+          </MyButton>
+          <MyButton onPress={handleLocation}>
+            <MaterialIcons
+              name="my-location"
+              size={24}
+              color={colors.terciary}
+            />
+          </MyButton>
+          <MyButton onPress={handleSetLocation}>
+            <MaterialIcons
+              name="edit-location"
+              size={24}
+              color={colors.terciary}
+            />
           </MyButton>
         </View>
       </View>
@@ -95,7 +121,7 @@ const SaveLocationScreen = () => {
   );
 };
 
-export default SaveLocationScreen;
+export default AddLocationScreen;
 
 const styles = StyleSheet.create({
   container: {
