@@ -4,7 +4,7 @@ import { colors } from "../Styles/colors";
 import * as ImagePicker from "expo-image-picker";
 //import renamePathAndMove from "../Utilities/renamePath";
 import { useDispatch } from "react-redux";
-import { addLocation } from "../features/locations";
+import { addLocation, addLocationDb } from "../features/locations";
 import MyButton from "../Components/MyButton";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -56,8 +56,12 @@ const AddLocationScreen = ({ navigation, route }) => {
 
   const handleConfirm = async () => {
     //const path = await renamePathAndMove(picture);
+    let id = Date.now()
     dispatch(
-      addLocation({ title, picture, id: Date.now(), address: params?.address })
+      addLocation({ title, picture, id, address: params?.address })
+    );
+    dispatch(
+      addLocationDb({ title, picture,id,  address: params?.address })
     );
     setTitle("");
     setPicture("");
@@ -84,7 +88,7 @@ const AddLocationScreen = ({ navigation, route }) => {
         />
         {picture ? (
           <Image source={{ uri: picture }} style={styles.image} />
-        ) : null}
+        ) : <View style={styles.image}><Text style={styles.imageText}>Toma una foto o elige una imagen de la galería... luego selecciona una dirección con localización o manualmente...</Text></View>}
         <View style={styles.buttonsContainer}>
           <MyButton onPress={handleTakePicture}>
             <Entypo name="camera" size={24} color={colors.terciary} />
@@ -151,7 +155,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   input: {
-    width: "60%",
+    width: "90%",
     height: 35,
     fontSize: 18,
     borderRadius: 10,
@@ -160,15 +164,23 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
   },
   image: {
-    width: "85%",
+    width: "90%",
     height: 150,
     borderRadius: 15,
-    borderWidth: 2,
-    borderColor: colors.lightBlue,
+    backgroundColor: colors.primary,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imageText: {
+    color: colors.secondary,
+    padding: 20,
+    textAlign: "center",    
+    fontSize: 16,
   },
   buttonsContainer: {
     flexDirection: "row",
     margin: 10,
+
   },
   buttonText: {
     color: colors.blue,

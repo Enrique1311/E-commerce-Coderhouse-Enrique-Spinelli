@@ -5,6 +5,15 @@ import MainNavigator from "./Navigation";
 import { Provider } from "react-redux";
 import store from "./Store";
 
+import { init } from './db';
+
+init()
+.then(()=> {console.log('Db initializada');})
+.catch((error)=> {
+  console.log('Error loading db');
+  console.log(error.message);
+})
+
 export default function App() {
   const [loaded] = useFonts({
     Koulen: require("./assets/fonts/Koulen/Koulen-Regular.ttf"),
