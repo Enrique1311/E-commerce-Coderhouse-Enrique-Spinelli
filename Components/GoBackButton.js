@@ -11,8 +11,9 @@ const GoBackButton = ({ navigation }) => {
       onPress={() => handleBack()}
       addButtonStyles={{
         backgroundColor: colors.blue,
-        width: 60,
         borderWidth: 2,
+        padding: 5,
+        paddingHorizontal: 10,
       }}
     >
       <Ionicons name="arrow-back" size={20} color={colors.light} />

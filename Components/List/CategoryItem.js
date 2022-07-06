@@ -25,10 +25,6 @@ const CategoryItem = ({ category }) => {
           resizeMode="contain"
         />
       </View>
-
-      {/* <View style={styles.image}>
-        <Text>{category.image}</Text>
-      </View> */}
       <View style={styles.textContainer}>
         <Text style={styles.text}>{category.category}</Text>
       </View>

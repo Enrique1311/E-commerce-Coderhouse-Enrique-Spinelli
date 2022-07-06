@@ -37,8 +37,6 @@ export const signUp = createAsyncThunk(
 export const login = createAsyncThunk(
   "auth/login",
   async (emailAndPassword, asyncThunk) => {
-    console.log(emailAndPassword);
-    // console.log(asyncThunk.getState());
     try {
       const resp = await fetch(`${AUTH_LOGIN}`, {
         method: "POST",
@@ -60,7 +58,13 @@ export const login = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.value.user.userId = "";
+      state.value.user.password = "";
+      state.value.user.email = "";
+    },
+  },
   extraReducers: {
     [signUp.pending]: (state) => {
       state.value.loading = true;
@@ -86,7 +90,6 @@ export const authSlice = createSlice({
       if (payload.error) {
         state.value.error = payload.error.message;
       }
-
       state.value.user.userId = payload.localId;
       state.value.user.email = payload.email;
       state.value.user.token = payload.idToken;
@@ -97,5 +100,5 @@ export const authSlice = createSlice({
     },
   },
 });
-
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

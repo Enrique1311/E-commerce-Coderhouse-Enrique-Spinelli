@@ -36,7 +36,7 @@ const LocationsStack = () => {
               <MyButton onPress={() => navigation.navigate("AddLocation")}>
                 <MaterialIcons
                   name="add-location"
-                  size={24}
+                  size={25}
                   color={colors.light}
                 />
               </MyButton>

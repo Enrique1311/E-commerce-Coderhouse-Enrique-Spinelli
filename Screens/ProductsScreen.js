@@ -18,13 +18,13 @@ const ProductsScreen = ({
 
   const [productsFiltered, setProductsFiltered] = useState([]);
 
-  const { products } = useSelector((state) => state.products.value);
+  //const { products } = useSelector((state) => state.products.value);
 
   const { productsByCategory } = useSelector((state) => state.products.value);
 
   const dispatch = useDispatch();
 
-  const { categoryId } = route.params;
+  //const { categoryId } = route.params;
 
   useEffect(() => {
     if (productsByCategory.length !== 0) {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     width: "95%",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 85,
+    marginBottom: 95,
     marginTop: 5,
     borderRadius: 20,
     backgroundColor: colors.white,

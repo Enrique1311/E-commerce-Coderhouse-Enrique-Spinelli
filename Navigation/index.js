@@ -8,7 +8,7 @@ const MainNavigator = () => {
 
   return (
     <NavigationContainer>
-      {!user.email ? <TabNavigatorLogged /> : <AuthStack />}
+      {user.email ? <TabNavigatorLogged /> : <AuthStack />}
     </NavigationContainer>
   );
 };

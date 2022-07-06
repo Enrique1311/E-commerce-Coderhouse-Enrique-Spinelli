@@ -14,6 +14,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 const AddLocationScreen = ({ navigation, route }) => {
   const [title, setTitle] = useState("");
   const [picture, setPicture] = useState("");
+  const [address, setAddress] = useState("");
 
   const params = route.params;
 
@@ -33,7 +34,6 @@ const AddLocationScreen = ({ navigation, route }) => {
 
   const getPermission = async () => {
     const { status } = await ImagePicker.getCameraPermissionsAsync();
-
     if (status === "granted") {
       return true;
     }
@@ -56,71 +56,103 @@ const AddLocationScreen = ({ navigation, route }) => {
 
   const handleConfirm = async () => {
     //const path = await renamePathAndMove(picture);
-    let id = Date.now()
-    dispatch(
-      addLocation({ title, picture, id, address: params?.address })
-    );
-    dispatch(
-      addLocationDb({ title, picture,id,  address: params?.address })
-    );
+    let id = Date.now();
+    dispatch(addLocation({ title, picture, id, address: params?.address }));
+    dispatch(addLocationDb({ title, picture, id, address: params?.address }));
     setTitle("");
     setPicture("");
+    setAddress("");
+    navigation.goBack(title);
   };
 
   const handleSetLocation = () => {
     navigation.navigate("SetLocation");
+    setAddress(params?.address);
   };
 
   const handleLocation = () => {
     navigation.navigate("GetLocation");
+    setAddress(params?.address);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>Nueva dirección</Text>
-      <View style={styles.addImageContainer}>
-        <TextInput
-          value={title}
-          onChangeText={setTitle}
-          placeholder="Escribe un título"
-          style={styles.input}
-          selectionColor={colors.white}
-        />
-        {picture ? (
-          <Image source={{ uri: picture }} style={styles.image} />
-        ) : <View style={styles.image}><Text style={styles.imageText}>Toma una foto o elige una imagen de la galería... luego selecciona una dirección con localización o manualmente...</Text></View>}
+      <TextInput
+        value={title}
+        onChangeText={setTitle}
+        placeholder="Escribe un título"
+        style={styles.input}
+        selectionColor={colors.primary}
+      />
+      {picture ? (
+        <Image source={{ uri: picture }} style={styles.image} />
+      ) : (
+        <View style={styles.image}>
+          <Text style={styles.imageText}>
+            Toma una foto o elige una imagen de la galería... luego selecciona
+            una dirección con localización o manualmente...
+          </Text>
+        </View>
+      )}
+      <View style={styles.allButtons}>
         <View style={styles.buttonsContainer}>
-          <MyButton onPress={handleTakePicture}>
-            <Entypo name="camera" size={24} color={colors.terciary} />
-          </MyButton>
-          <MyButton onPress={handlePickLibrary}>
-            <Ionicons name="images" size={24} color={colors.terciary} />
-          </MyButton>
-          <MyButton onPress={handleLocation}>
-            <MaterialIcons
-              name="my-location"
-              size={24}
-              color={colors.terciary}
-            />
-          </MyButton>
-          <MyButton onPress={handleSetLocation}>
-            <MaterialIcons
-              name="edit-location"
-              size={24}
-              color={colors.terciary}
-            />
-          </MyButton>
+          <View style={styles.buttons}>
+            <MyButton
+              onPress={handleTakePicture}
+              addButtonStyles={styles.iconsButtons}
+            >
+              <Entypo name="camera" size={35} color={colors.blue} />
+            </MyButton>
+            <MyButton
+              onPress={handlePickLibrary}
+              addButtonStyles={styles.iconsButtons}
+            >
+              <Ionicons name="images" size={35} color={colors.blue} />
+            </MyButton>
+          </View>
+        </View>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttons}>
+            <MyButton
+              onPress={handleLocation}
+              addButtonStyles={styles.iconsButtons}
+            >
+              <MaterialIcons name="my-location" size={37} color={colors.blue} />
+            </MyButton>
+            <MyButton
+              onPress={handleSetLocation}
+              addButtonStyles={styles.iconsButtons}
+            >
+              <MaterialIcons
+                name="edit-location"
+                size={37}
+                color={colors.blue}
+              />
+            </MyButton>
+          </View>
         </View>
       </View>
-      <MyButton
-        onPress={handleConfirm}
-        addButtonStyles={{
-          borderColor: colors.blue,
-          backgroundColor: colors.white,
+      <View
+        style={{
+          opacity: picture === "" || title === "" || address === "" ? 0.2 : 1,
         }}
       >
-        <Text style={styles.buttonText}>Confirmar</Text>
-      </MyButton>
+        <MyButton
+          onPress={handleConfirm}
+          disabled={
+            picture === "" || title === "" ? true || address === "" : false
+          }
+          addButtonStyles={{
+            borderColor: colors.blue,
+            backgroundColor: colors.white,
+            paddingVertical: 7,
+            paddingHorizontal: 20,
+          }}
+        >
+          <Text style={styles.confirmButtonText}>Confirmar</Text>
+        </MyButton>
+      </View>
     </View>
   );
 };
@@ -132,7 +164,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "95%",
     alignItems: "center",
-    marginBottom: 85,
+    marginBottom: 95,
     margin: 10,
     borderRadius: 20,
     backgroundColor: colors.white,
@@ -147,7 +179,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   addImageContainer: {
-    width: "90%",
+    width: "95%",
     alignItems: "center",
     borderRadius: 15,
     backgroundColor: colors.secondary,
@@ -159,33 +191,53 @@ const styles = StyleSheet.create({
     height: 35,
     fontSize: 18,
     borderRadius: 10,
-    margin: 10,
+    margin: 5,
     paddingHorizontal: 10,
-    backgroundColor: colors.light,
+    backgroundColor: colors.secondary,
   },
   image: {
     width: "90%",
-    height: 150,
+    height: 200,
     borderRadius: 15,
     backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
+    marginVertical: 10,
   },
   imageText: {
     color: colors.secondary,
     padding: 20,
-    textAlign: "center",    
+    textAlign: "center",
     fontSize: 16,
   },
-  buttonsContainer: {
+  allButtons: {
     flexDirection: "row",
-    margin: 10,
 
+    width: "90%",
+    justifyContent: "space-between",
   },
-  buttonText: {
+  buttonsContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    marginVertical: 5,
+    borderRadius: 15,
+    backgroundColor: colors.secondary,
+    width: "49%",
+  },
+  buttons: {
+    flexDirection: "row",
+  },
+  confirmButtonText: {
     color: colors.blue,
     fontSize: 18,
     fontWeight: "bold",
     fontFamily: "MuktaBold",
+    marginHorizontal: 10,
+  },
+  iconsButtons: {
+    borderRadius: 0,
+    padding: 0,
+    backgroundColor: "transparent",
+    borderColor: "transparent",
   },
 });

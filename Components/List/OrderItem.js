@@ -11,8 +11,10 @@ const OrderItem = ({ item }) => {
   return (
     <View style={styles.order}>
       <View style={styles.orderContainer}>
-        <Text style={styles.date}>{formatDay(item.date)}</Text>
-        <Text style={styles.total}>{}</Text>
+        <Text style={styles.date}>Fecha: {formatDay(item.date)}</Text>
+        <Text style={styles.paragraph}>
+          {item.items.map((el) => `${el.quantity} ${el.name}`).join(" + ")}
+        </Text>
       </View>
     </View>
   );
@@ -38,5 +40,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
     elevation: 7,
+  },
+  date: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: colors.blue,
+    fontFamily: "MuktaBold",
+    marginRight: 30,
+  },
+  paragraph: {
+    fontFamily: "MuktaBold",
+    fontSize: 16,
+    color: colors.primary,
+    flexDirection: "column",
+    width: "100%",
   },
 });

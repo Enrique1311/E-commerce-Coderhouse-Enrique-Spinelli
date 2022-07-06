@@ -2,8 +2,16 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "../../Styles/colors";
+import { removeItem } from "../../features/cart";
+import { useDispatch } from "react-redux";
 
-const CartItem = ({ item, onDelete }) => {
+const CartItem = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const onDelete = (item) => {
+    dispatch(removeItem(item));
+  };
+
   return (
     <View style={styles.item}>
       <View>
@@ -16,7 +24,7 @@ const CartItem = ({ item, onDelete }) => {
           Subtotal: $ {item.price * item.quantity}
         </Text>
       </View>
-      <TouchableOpacity onPress={() => onDelete(item.id)}>
+      <TouchableOpacity onPress={() => onDelete(item)}>
         <MaterialIcons name="delete" size={30} color={colors.primary} />
       </TouchableOpacity>
     </View>

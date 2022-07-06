@@ -20,7 +20,6 @@ export const PRODUCTS = [
       "Intel Core i7-11390H, 32GB de RAM, 512GB SSD, 15.6 FHD IPS, Windows 11 Home",
     price: 245000,
     image: img1,
-    stock: 20,
   },
   {
     id: 2,
@@ -29,7 +28,6 @@ export const PRODUCTS = [
     description: "SM-X200, 10.5, 64GB y 4GB de RAM",
     price: 54000,
     image: img2,
-    stock: 20,
   },
   {
     id: 3,
@@ -38,7 +36,6 @@ export const PRODUCTS = [
     description: "128 GB, Sky Blue, 4 GB de RAM",
     price: 53000,
     image: img3,
-    stock: 20,
   },
   {
     id: 4,
@@ -47,7 +44,6 @@ export const PRODUCTS = [
     description: "F27T350FHL, Led 27, Dark Blue Gray, 60Hz, 100V/240V",
     price: 48000,
     image: img4,
-    stock: 20,
   },
   {
     id: 5,
@@ -57,7 +53,6 @@ export const PRODUCTS = [
       "Intel Core i7-1165G7, 16GB de RAM, 512GB SSD, 15.6 FHD, Windows 10 Home",
     price: 210000,
     image: img5,
-    stock: 20,
   },
   {
     id: 6,
@@ -66,7 +61,6 @@ export const PRODUCTS = [
     description: "10.1, Quad Core, 5mpx, 1GB de RAM",
     price: 18000,
     image: img6,
-    stock: 20,
   },
   {
     id: 7,
@@ -75,7 +69,6 @@ export const PRODUCTS = [
     description: "128 GB, Black, 6 GB de RAM",
     price: 74000,
     image: img7,
-    stock: 20,
   },
   {
     id: 8,
@@ -84,7 +77,6 @@ export const PRODUCTS = [
     description: "UltraGear 24GN600, Led 24, Negro, 60Hz, 100V/240V",
     price: 62000,
     image: img8,
-    stock: 20,
   },
   {
     id: 9,
@@ -94,7 +86,6 @@ export const PRODUCTS = [
       "Intel Core i5-1135G7, 8GB de RAM, 216GB SSD, 15.6 FHD, Windows 10 Home",
     price: 148000,
     image: img9,
-    stock: 20,
   },
   {
     id: 10,
@@ -103,7 +94,6 @@ export const PRODUCTS = [
     description: "FHD Plus 2nd Gen TB-X606F, 10.3, 32GB y 2GB de RAM",
     price: 28000,
     image: img10,
-    stock: 20,
   },
   {
     id: 11,
@@ -112,7 +102,6 @@ export const PRODUCTS = [
     description: "Xt-2125, Dual Chip, 128 GB, 6GB de RAM, 5G ",
     price: 110000,
     image: img11,
-    stock: 20,
   },
   {
     id: 12,
@@ -121,6 +110,5 @@ export const PRODUCTS = [
     description: "VG27AQ, Led 27, Negro, 90Hz, 100V/240V",
     price: 105000,
     image: img12,
-    stock: 20,
   },
 ];

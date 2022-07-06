@@ -7,4 +7,5 @@ export const colors = {
   blue: "#11468F",
   red: "#D82148",
   white: "#FFFFFF",
+  backModal: "rgba(0, 0, 0, 0.8)",
 };

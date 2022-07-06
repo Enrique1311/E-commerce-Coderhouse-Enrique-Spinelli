@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { CATEGORIES } from "../Data/categories";
 import { selectCategory } from "../features/categories";
 import { setProductByCategory } from "../features/products";
-//import { CATEGORIES } from "../Data/categories";
 
 const CategoriesScreen = ({ navigation }) => {
   const [input, setInput] = useState("");
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     width: "95%",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 85,
+    marginBottom: 95,
     marginTop: 5,
     borderRadius: 20,
     backgroundColor: colors.white,

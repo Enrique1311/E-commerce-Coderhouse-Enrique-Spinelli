@@ -3,49 +3,29 @@ import { useState } from "react";
 import MyInput from "../Components/MyInput";
 import { colors } from "../Styles/colors";
 import MyButton from "../Components/MyButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp, login } from "../features/auth";
 import { Formik } from "formik";
 import loginValidationSchema from "../Utilities/validateSchemas";
 
 const AuthScreen = () => {
   const [registerView, setRegisterView] = useState(false);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [passwordConfirm, setPasswordConfirm] = useState("");
-  // const [emailError, setEmailError] = useState("");
-  // const [passwordError, setPasswordError] = useState("");
+
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const { error } = useSelector((state) => state.auth.value);
 
   const dispatch = useDispatch();
 
   const handleSignup = () => {
-    // const validateEmailAndPassword = loginValidationSchema.validate({
-    //   email,
-    //   password,
-    // });
-    // if (validateEmailAndPassword.email) {
     setEmailError("");
     setPasswordError("");
     if (password === confirmPassword) {
       dispatch(signUp({ email: email, password: password }));
     } else {
-      setConfirmPasswordError("Los passwords deben coincidir");
+      setConfirmPasswordError("Las contraseñas deben coincidir");
     }
-    // }
   };
-
-  // const handleLogin = () => {
-  //   const validateEmailAndPassword = loginValidationSchema.validate({
-  //     email,
-  //     password,
-  //   });
-  //   if (validateEmailAndPassword.email) {
-  //     setEmailError("");
-  //     setPasswordError("");
-  //     dispatch(login({ email: email, password: password }));
-  //   }
-  // };
 
   const handleSubmit = (values) => {
     if (registerView) {
@@ -65,6 +45,7 @@ const AuthScreen = () => {
         <Text style={styles.title}>
           {registerView ? "Registro" : "Iniciar seción"}
         </Text>
+        <Text>{error}</Text>
         <Formik
           onSubmit={handleSubmit}
           initialValues={{ email: "", password: "", passwordConfirm: "" }}
@@ -92,7 +73,7 @@ const AuthScreen = () => {
               />
               {registerView && (
                 <MyInput
-                  label="Confirmar contrseña"
+                  label="Confirmar contraseña"
                   password={true}
                   onChange={handleChange("passwordConfirm")}
                   value={values.passwordConfirm}
@@ -170,7 +151,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: colors.light,
     paddingHorizontal: 24,
-    paddingVertical: 3,
+    paddingVertical: 0,
     fontWeight: "bold",
     fontSize: 18,
     textAlign: "center",

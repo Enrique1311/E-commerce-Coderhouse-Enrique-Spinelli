@@ -18,7 +18,7 @@ function ShopNavigator() {
         headerShown: "",
         headerTitleStyle: {
           fontFamily: "Koulen",
-          fontSize: 26,
+          fontSize: 25,
         },
         headerTitleAlign: "center",
       }}

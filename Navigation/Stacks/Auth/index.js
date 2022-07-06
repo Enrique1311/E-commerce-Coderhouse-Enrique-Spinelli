@@ -16,7 +16,7 @@ const AuthStack = () => {
         headerTintColor: colors.light,
         headerTitleStyle: {
           fontFamily: "Koulen",
-          fontSize: 24,
+          fontSize: 25,
         },
         headerTitleAlign: "left",
       }}

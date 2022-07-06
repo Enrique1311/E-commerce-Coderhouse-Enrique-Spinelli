@@ -6,17 +6,25 @@ import { colors } from "../Styles/colors";
 import MyButton from "../Components/MyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../features/cart";
+import MyModal from "../Components/MyModal";
+import { useState } from "react";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const DetailsScreen = ({ route, navigation }) => {
   const { productSelected } = useSelector((state) => state.products.value);
   const { productTitle } = route.params;
   const dispatch = useDispatch();
+  const [modalVisibility, setModalVisibility] = useState(false);
 
-  const handleAdd = (id) => {
+  const handleAddProduct = (id) => {
     dispatch(addItem({ id: id }));
+    setModalVisibility(!modalVisibility);
+    setTimeout(() => {
+      setModalVisibility(false);
+    }, 2000);
   };
 
-  //  const [product, setProduct] = useState(null);
+  // const [product, setProduct] = useState(null);
 
   // useEffect(() => {
   //   setProduct(PRODUCTS.find((product) => product.id === productId));
@@ -45,13 +53,31 @@ const DetailsScreen = ({ route, navigation }) => {
                 </Text>
               </View>
               <MyButton
-                onPress={() => handleAdd(productSelected.id)}
-                addButtonStyles={{ marginBottom: 20 }}
+                onPress={() => handleAddProduct(productSelected.id)}
+                addButtonStyles={{
+                  marginBottom: 20,
+                  paddingHorizontal: 20,
+                  paddingVertical: 5,
+                }}
               >
                 <Text style={styles.buttonText}>Agregar al carrito</Text>
               </MyButton>
             </View>
           </View>
+          <MyModal
+            modalVisibility={modalVisibility}
+            setModalVisibility={setModalVisibility}
+          >
+            <Text style={styles.modalText}>{productSelected.name}...</Text>
+            <View style={styles.modalIcons}>
+              <FontAwesome5
+                name="shopping-cart"
+                size={60}
+                color={colors.blue}
+              />
+            </View>
+            <Text style={styles.modalText}>¡Se agregó al carrito!</Text>
+          </MyModal>
         </View>
       </>
     )
@@ -63,7 +89,7 @@ export default DetailsScreen;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    marginBottom: 85,
+    marginBottom: 95,
     marginTop: 5,
     marginHorizontal: 10,
     padding: 10,
@@ -121,8 +147,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonText: {
+    textAlign: "center",
     color: colors.light,
     fontFamily: "MuktaBold",
     fontSize: 18,
+    marginHorizontal: 10,
+  },
+  modalText: {
+    textAlign: "center",
+    fontFamily: "MuktaBold",
+    fontSize: 20,
+    color: colors.primary,
+  },
+  modalIcons: {
+    alignItems: "center",
+    margin: 20,
   },
 });

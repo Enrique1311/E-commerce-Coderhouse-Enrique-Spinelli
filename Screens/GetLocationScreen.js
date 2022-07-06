@@ -1,8 +1,9 @@
-import { Image, StyleSheet, Text, View, Button } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { API_KEY } from "../Constants/googleAPI";
 import MyButton from "../Components/MyButton";
+import { colors } from "../Styles/colors";
 
 //https://developers.google.com/maps/documentation/maps-static/start DOC API
 //https://developers.google.com/maps/documentation/maps-static/start#Markers Markers DOC
@@ -53,11 +54,12 @@ const GetLocationScreen = ({ navigation }) => {
     }
   }, [location]);
 
-  let text = "Waiting..";
+  let text = "Cargando ubicación...";
   if (errorMessage) {
     text = errorMessage;
   } else if (location) {
-    text = JSON.stringify(location);
+    // text = JSON.stringify(location);
+    text = "Mi ubicación";
   }
 
   // console.log(photo);
@@ -68,15 +70,26 @@ const GetLocationScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>{text}</Text>
-      <View>
+      <View style={styles.imageContainer}>
         {photo ? (
-          <Image source={{ uri: photo }} style={{ width: 500, height: 500 }} />
+          <Image
+            source={{ uri: photo }}
+            style={{
+              width: "100%",
+              height: "76%",
+              borderRadius: 15,
+              marginBottom: 10,
+              overflow: "hidden",
+              borderColor: colors.secondary,
+              borderWidth: 2,
+            }}
+          />
         ) : null}
         {address ? (
           <>
-            <Text>{address}</Text>
+            <Text style={styles.address}>{address}</Text>
             <MyButton onPress={handleConfirmLocation}>
-              <Text>Confirmar</Text>
+              <Text style={styles.buttonText}>Confirmar</Text>
             </MyButton>
           </>
         ) : null}
@@ -87,4 +100,35 @@ const GetLocationScreen = ({ navigation }) => {
 
 export default GetLocationScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    borderColor: colors.secondary,
+    borderWidth: 2,
+    margin: 10,
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 95,
+  },
+  paragraph: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: colors.blue,
+  },
+  imageContainer: {
+    width: "100%",
+    alignItems: "center",
+  },
+  address: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: colors.primary,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: colors.terciary,
+    paddingHorizontal: 10,
+  },
+});

@@ -1,15 +1,15 @@
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList, View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { colors } from "../Styles/colors";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import PlaceItem from "../Components/List/PlaceItem";
-import { getLocations, removeLocationDb } from "../features/locations";
+import { Ionicons } from "@expo/vector-icons";
+import { getLocations } from "../features/locations";
 
 const renderItem = ({ item }) => {
-
   return (
     <PlaceItem
-      onSelect={() => {}}
       title={item.title}
       image={item.picture}
       address={item.address}
@@ -24,16 +24,22 @@ const LocationsScreen = () => {
   useEffect(() => {
     dispatch(getLocations());
   }, []);
-
   const { locations } = useSelector((state) => state.locations.value);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        renderItem={renderItem}
-        data={locations}
-        keyExtractor={(location) => location.id}
-      />
+      {locations.length === 0 ? (
+        <View style={styles.emptyLocation}>
+          <Text style={styles.paragraph}>¡No hay direcciones cargadas!</Text>
+          <Ionicons name="location-sharp" size={100} color={colors.secondary} />
+        </View>
+      ) : (
+        <FlatList
+          renderItem={renderItem}
+          data={locations}
+          keyExtractor={(location) => location.id}
+        />
+      )}
     </View>
   );
 };
@@ -45,11 +51,23 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "95%",
     justifyContent: "space-between",
-    marginBottom: 85,
+    marginBottom: 95,
     margin: 10,
     borderRadius: 20,
     backgroundColor: colors.white,
     borderWidth: 2,
     borderColor: colors.secondary,
+    overflow: "hidden",
+  },
+  emptyLocation: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  paragraph: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: colors.primary,
+    textAlign: "center",
   },
 });

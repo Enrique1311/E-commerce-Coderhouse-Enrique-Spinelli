@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { deleteAddress, fetchAddress, insertAddress } from "../../db";
 
-
 const initialState = {
   value: {
     locations: [],
@@ -33,36 +32,36 @@ export const addLocationDb = createAsyncThunk(
 );
 
 export const getLocations = createAsyncThunk(
-  'location/getLocations',
-  async(_, asyncThunk) => {
-      try {
-          const result = await fetchAddress()
-          console.log("Resultado al traer los datos de la DB en el thunk");
-          console.log(result);
-          const data = result.rows._array
-          return data
-      } catch (error) {
-          return asyncThunk.rejectWithValue("Error al traer los datos de la DB")
-      }
+  "location/getLocations",
+  async (_, asyncThunk) => {
+    try {
+      const result = await fetchAddress();
+      console.log("Resultado al traer los datos de la DB en el thunk");
+      console.log(result);
+      const data = result.rows._array;
+      return data;
+    } catch (error) {
+      return asyncThunk.rejectWithValue("Error al traer los datos de la DB");
+    }
   }
-)
+);
 
 export const removeLocationDb = createAsyncThunk(
-  'location/addToDb',
+  "location/addToDb",
   async (location, asyncThunk) => {
-      try {
-          const result = await deleteAddress(
-            location.id,
-          )
-          console.log("Remove location db result:");
-          console.log(result);
-          return `Item con id: ${location.id} borrado!`
-      } catch (error) {
-          console.log(error.message);
-          return asyncThunk.rejectWithValue(`Error al borrar item con id: ${location.id}`)
-      }
+    try {
+      const result = await deleteAddress(location.id);
+      console.log("Remove location db result:");
+      console.log(result);
+      return `Item con id: ${location.id} borrado!`;
+    } catch (error) {
+      console.log(error.message);
+      return asyncThunk.rejectWithValue(
+        `Error al borrar item con id: ${location.id}`
+      );
+    }
   }
-)
+);
 
 const locationSlice = createSlice({
   name: "locations",
@@ -71,19 +70,19 @@ const locationSlice = createSlice({
     addLocation: (state, { payload }) => {
       state.value.locations.push(payload);
     },
-    removeLocation: (state, {payload}) => {
-      state.value.locations = state.value.locations.filter(location => location.id !== payload.id)
-  }
+    removeLocation: (state, { payload }) => {
+      state.value.locations = state.value.locations.filter(
+        (location) => location.id !== payload.id
+      );
+    },
   },
   extraReducers: {
     [addLocationDb.pending]: (state) => {
       state.value.loading = true;
     },
-    [addLocationDb.fulfilled]: (state, { payload }) => {
-      console.log(payload);
+    [addLocationDb.fulfilled]: (state) => {
       state.value.loading = false;
       state.value.error = null;
-      // state.value.rowId = payload
     },
     [addLocationDb.rejected]: (state, { payload }) => {
       state.value.loading = false;
@@ -116,5 +115,5 @@ const locationSlice = createSlice({
   },
 });
 
-export const { addLocation, removeLocation} = locationSlice.actions;
+export const { addLocation, removeLocation } = locationSlice.actions;
 export default locationSlice.reducer;

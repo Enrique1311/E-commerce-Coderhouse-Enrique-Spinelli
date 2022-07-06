@@ -1,18 +1,20 @@
 import { ActivityIndicator } from "react-native";
 import { useFonts } from "expo-font";
-//import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import MainNavigator from "./Navigation";
 import { Provider } from "react-redux";
 import store from "./Store";
 
-import { init } from './db';
+import { init } from "./db";
 
 init()
-.then(()=> {console.log('Db initializada');})
-.catch((error)=> {
-  console.log('Error loading db');
-  console.log(error.message);
-})
+  .then(() => {
+    console.log("Db inicializada");
+  })
+  .catch((error) => {
+    console.log("Error loading db");
+    console.log(error.message);
+  });
 
 export default function App() {
   const [loaded] = useFonts({
@@ -24,10 +26,10 @@ export default function App() {
   }
 
   return (
-    //<SafeAreaView style={{ flex: 1 }}>
-    <Provider store={store}>
-      <MainNavigator />
-    </Provider>
-    //</SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <MainNavigator />
+      </Provider>
+    </SafeAreaView>
   );
 }

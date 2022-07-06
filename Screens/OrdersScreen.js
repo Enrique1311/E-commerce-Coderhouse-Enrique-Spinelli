@@ -1,20 +1,17 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Text } from "react-native";
 import React, { useEffect } from "react";
 import OrderItem from "../Components/List/OrderItem";
-import { ORDERS } from "../Data/orders";
 import { colors } from "../Styles/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/orders";
+import { FontAwesome } from "@expo/vector-icons";
 
-const renderItem = (data) => <OrderItem item={data.item} />;
+const renderItem = ({ item }) => <OrderItem item={item} />;
 
 const OrdersScreen = () => {
   const dispatch = useDispatch();
 
-  /////////////
   const { orders } = useSelector((state) => state.orders.value);
-  console.log(orders);
-  //////////////
 
   useEffect(() => {
     dispatch(getOrders());
@@ -22,14 +19,21 @@ const OrdersScreen = () => {
 
   return (
     <View style={styles.ordersContainer}>
-      <View style={styles.list}>
-        <FlatList
-          data={orders}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
+      {orders.length === 0 ? (
+        <View style={styles.emptyOrders}>
+          <Text style={styles.paragraph}>¡No hay órdenes cargadas!</Text>
+          <FontAwesome name="list-alt" size={100} color={colors.secondary} />
+        </View>
+      ) : (
+        <View style={styles.list}>
+          <FlatList
+            data={orders}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -42,14 +46,26 @@ const styles = StyleSheet.create({
     width: "95%",
     justifyContent: "center",
     alignSelf: "center",
-    marginBottom: 85,
+    marginBottom: 95,
     marginTop: 10,
     borderRadius: 20,
     backgroundColor: colors.white,
     borderWidth: 2,
     borderColor: colors.secondary,
+    overflow: "hidden",
   },
   list: {
     flex: 1,
+  },
+  emptyOrders: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  paragraph: {
+    textAlign: "center",
+    fontFamily: "MuktaBold",
+    fontSize: 20,
+    color: colors.primary,
   },
 });

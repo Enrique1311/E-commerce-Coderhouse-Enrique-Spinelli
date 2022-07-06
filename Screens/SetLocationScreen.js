@@ -11,9 +11,9 @@ const SetLocationScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const initialRegion = {
-    latitude: 37,
-    longitude: -120,
-    latitudeDelta: 0.08,
+    latitude: -34.75,
+    longitude: -58.24,
+    latitudeDelta: 0.15,
     longitudeDelta: 0.03,
   };
 
@@ -46,8 +46,6 @@ const SetLocationScreen = ({ navigation }) => {
       navigation.navigate("AddLocation", { address });
     })();
   };
-  console.log(errorMessage);
-  console.log(location);
 
   return (
     <View style={styles.container}>
@@ -73,10 +71,14 @@ const SetLocationScreen = ({ navigation }) => {
               ) : null}
             </MapView>
           </View>
-
-          <MyButton onPress={handleConfirm}>
-            <Text style={styles.buttonText}>Confirmar</Text>
-          </MyButton>
+          <View style={{ opacity: location === null ? 0.1 : 1 }}>
+            <MyButton
+              onPress={handleConfirm}
+              disabled={location === null ? true : false}
+            >
+              <Text style={styles.buttonText}>Confirmar</Text>
+            </MyButton>
+          </View>
         </>
       )}
     </View>
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "95%",
     alignItems: "center",
-    marginBottom: 85,
+    marginBottom: 95,
     margin: 10,
     padding: 10,
     borderRadius: 20,
@@ -123,6 +125,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.white,
     fontFamily: "MuktaBold",
-    padding: 5,
+    marginHorizontal: 10,
   },
 });
