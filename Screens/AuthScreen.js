@@ -43,7 +43,7 @@ const AuthScreen = () => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>
-          {registerView ? "Registro" : "Iniciar seción"}
+          {registerView ? "Registro" : "Iniciar sesión"}
         </Text>
         <Text>{error}</Text>
         <Formik
@@ -84,7 +84,7 @@ const AuthScreen = () => {
               <View style={styles.buttonContainer}>
                 <MyButton onPress={handleSubmit}>
                   <Text style={styles.buttonText}>
-                    {registerView ? "Registrar" : "Iniciar seción"}
+                    {registerView ? "Registrar" : "Iniciar sesión"}
                   </Text>
                 </MyButton>
                 <MyButton
