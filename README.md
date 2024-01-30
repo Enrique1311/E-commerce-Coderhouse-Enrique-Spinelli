@@ -1,6 +1,6 @@
 # Mobile Ecommerce App
 
-![BANNER!](mobile_ecommerce.jpg)
+![BANNER!](mobile_ecommerce_1.jpg)
 
 <h3>This is a mobile application crafted with React Native, Expo, and CSS! This app seamlessly integrates Expo SQLite, Expo Location, React Native Maps, and Redux to provide users with a powerful and user-friendly experience. The app takes advantage of React Native's cross-platform capabilities, ensuring a consistent and smooth performance on both iOS and Android devices. The Expo framework simplifies the development process, allowing for quick deployment and hassle-free updates.</h3>
 
